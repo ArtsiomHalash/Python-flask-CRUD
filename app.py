@@ -37,6 +37,7 @@ def pagination(users, page, rows):
 
 @app.route("/", methods=['GET'])
 def getAllUsersDefault():
+    state['page'] = 1
     data = pagination(state['users'], state['page'], state['rows'])
 
     try:
