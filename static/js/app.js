@@ -1,4 +1,7 @@
 function create_user(event) {
+
+    //Function to fetch data of the user to be created from form and then make an ajax call of type POST to api
+
     event.preventDefault();
     let uId = document.getElementById("userID").value;
     let u_email = document.getElementById("userEmail").value;
@@ -9,7 +12,7 @@ function create_user(event) {
     if (validateForm(user)) {
         user = JSON.parse(JSON.stringify(user));
         $.ajax({
-            url: '/create',
+            url: '/create', //endpoint of API
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify({ user }),
             dataType: "json",
@@ -29,6 +32,9 @@ function create_user(event) {
 
 }
 function delete_user(event) {
+
+    //Function to fetch id of the user to be deleted from form and then make an ajax call of type DELETE to api
+
     event.preventDefault();
     let uid = document.getElementById("userID").value;
     let url = '/delete/' + uid
@@ -44,6 +50,9 @@ function delete_user(event) {
     });
 };
 function update_user(event) {
+
+    //Function to fetch data of the user to be updated from form and then make an ajax call of type PUT to api
+
     event.preventDefault();
     let uId = document.getElementById("userID").value;
     let u_email = document.getElementById("userEmail").value;
@@ -74,6 +83,9 @@ function update_user(event) {
         document.getElementById("status").innerHTML = "No Input Field can be empty";
 }
 function get_user(event) {
+
+    //Function to fetch if of the user to be displayed from form and then make an ajax call of type GET to api
+
     event.preventDefault();
     let uId = event.target.getAttribute('data-arg1');;
     let url = '/users/' + uId
@@ -82,7 +94,7 @@ function get_user(event) {
         type: 'GET',
         dataType: 'html',
         success: function (result) {
-            $("html").html(result);
+            $("html").html(result); //returned HTML response is then rendered on current page
         },
         error: function (error) {
             if (error.status != 200)
@@ -94,5 +106,8 @@ function get_user(event) {
 }
 
 function validateForm(user) {
+
+    //Function to check if all the fields are filled before making any API call
+
     return (user.id && user.email && user.fname && user.lname && user.avatar)
 }
